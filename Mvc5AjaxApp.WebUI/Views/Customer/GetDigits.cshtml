@@ -1,0 +1,12 @@
+﻿@model Mvc5AjaxApp.Domain.Entities.Customer
+
+@if (Model != null)
+{
+	foreach (var item in Model.Digits)
+	{
+		<ul class="list-group">
+			<li>@item.Number</li>
+		</ul>
+	}
+
+}

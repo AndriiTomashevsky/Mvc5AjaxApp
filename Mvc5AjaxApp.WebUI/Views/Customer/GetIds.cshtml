@@ -1,0 +1,25 @@
+﻿@using Mvc5AjaxApp.Domain.Entities
+
+@model IEnumerable<Customer>
+
+@{
+	AjaxOptions ajaxDigitsOptions = new AjaxOptions { UpdateTargetId = "digitsconteiner" };
+}
+
+
+@if (Model.Count() != 0)
+{
+	<h3>Ids</h3>
+	foreach (var item in Model)
+	{
+		using (Ajax.BeginForm("GetDigits", ajaxDigitsOptions))
+		{
+			@Html.TextBox("selectedId", item.DerivedId, new { type = "hidden" })
+			<button type="submit">@item.DerivedId</button>
+		}
+	}
+}
+else
+{
+	<p>No Ids</p>
+}

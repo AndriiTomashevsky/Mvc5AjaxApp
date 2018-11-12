@@ -1,0 +1,58 @@
+﻿@model Mvc5AjaxApp.WebUI.Models.CustomerViewModel
+
+@{
+	ViewBag.Title = "Generate";
+	//AjaxOptions ajaxDigitsOptions = new AjaxOptions { UpdateTargetId = "digitsconteiner" };
+	AjaxOptions ajaxIdOptions = new AjaxOptions { UpdateTargetId = "ids" };
+}
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+	<li class="nav-item">
+		<a class="nav-link active" href="#createid">Input</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="#result">Result</a>
+	</li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+	<div id="createid" class="container tab-pane active m-1">
+		<br>
+		@using (Ajax.BeginForm("GetIds", ajaxIdOptions))
+		{
+			<div class="col-sm-3">
+				<div class="form-goup">
+					<label>Id:</label>
+					@Html.TextBox("id", null, new { @class = "form-control" })
+				</div>
+				<div class="form-goup">
+					<label>N:</label>
+					@Html.TextBox("n", null, new { @class = "form-control" })
+				</div>
+				<div class="pt-3">
+					<input type="submit" value="Submit" />
+				</div>
+			</div>
+		}
+	</div>
+	<div id="result" class="container tab-pane fade ">
+		<br>
+			<div id="ids">
+				@Html.Action("GetIds")
+			</div>
+
+		<div id="digitsconteiner" class="pt-5">
+			@Html.Action("GetDigits", new { selectedId = Model.SelectedId })
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function () {
+		$(".nav-tabs a").click(function () {
+			$(this).tab('show');
+		});
+	});
+</script>
